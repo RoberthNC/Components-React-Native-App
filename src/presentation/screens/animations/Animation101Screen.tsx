@@ -1,51 +1,16 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  Animated,
-  Easing,
-} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Animated} from 'react-native';
 import {colors} from '../../../config/theme/theme';
-import {useRef} from 'react';
+import {useAnimation} from '../../hooks/useAnimation';
 
 export const Animation101Screen = () => {
-  const animatedOpacity = useRef(new Animated.Value(0.4)).current;
-  const animatedTop = useRef(new Animated.Value(-100)).current;
-
-  const fadeIn = () => {
-    Animated.timing(animatedOpacity, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => console.log('Animation ended'));
-  };
-
-  const fadeOut = () => {
-    Animated.timing(animatedOpacity, {
-      toValue: 0.4,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => console.log('Animation ended'));
-  };
-
-  const easingTop = () => {
-    Animated.timing(animatedTop, {
-      toValue: 0,
-      duration: 700,
-      useNativeDriver: true,
-      easing: Easing.bounce,
-    }).start(() => console.log('Animation ended'));
-  };
-
-  const easingBottom = () => {
-    Animated.timing(animatedTop, {
-      toValue: -100,
-      duration: 700,
-      easing: Easing.bounce,
-      useNativeDriver: true,
-    }).start(() => console.log('Animation ended'));
-  };
+  const {
+    animatedOpacity,
+    animatedPosition,
+    fadeIn,
+    fadeOut,
+    translatePositiveX,
+    translateNegativeX,
+  } = useAnimation();
 
   return (
     <View style={styles.container}>
@@ -56,7 +21,7 @@ export const Animation101Screen = () => {
             opacity: animatedOpacity,
             transform: [
               {
-                translateY: animatedTop,
+                translateX: animatedPosition,
               },
             ],
           },
@@ -65,30 +30,30 @@ export const Animation101Screen = () => {
       <Pressable
         style={{marginTop: 10}}
         onPress={() => {
-          fadeIn();
+          fadeIn({duration: 300, toValue: 0.4});
         }}>
         <Text style={{color: '#000'}}>FadeIn</Text>
       </Pressable>
       <Pressable
         style={{marginTop: 10}}
         onPress={() => {
-          fadeOut();
+          fadeOut({duration: 300, toValue: 1});
         }}>
         <Text style={{color: '#000'}}>FadeOut</Text>
       </Pressable>
       <Pressable
         style={{marginTop: 10}}
         onPress={() => {
-          easingTop();
+          translatePositiveX();
         }}>
-        <Text style={{color: '#000'}}>EasingTop</Text>
+        <Text style={{color: '#000'}}>Translate x+</Text>
       </Pressable>
       <Pressable
         style={{marginTop: 10}}
         onPress={() => {
-          easingBottom();
+          translateNegativeX();
         }}>
-        <Text style={{color: '#000'}}>EasingBottom</Text>
+        <Text style={{color: '#000'}}>Translate x-</Text>
       </Pressable>
     </View>
   );
