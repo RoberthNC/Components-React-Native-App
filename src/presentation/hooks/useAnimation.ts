@@ -3,7 +3,7 @@ import {Animated, Easing} from 'react-native';
 
 interface Args {
   duration: number;
-  toValue: number;
+  toValue?: number;
   callback?: () => void;
 }
 
