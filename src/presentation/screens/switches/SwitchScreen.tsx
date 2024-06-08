@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {CustomView} from '../../components/ui/CustomView';
 import {Card} from '../../components/ui/Card';
 import {CustomSwitch} from '../../components/ui/CustomSwitch';
+import {Separator} from '../../components/ui/Separator';
 
 export const SwitchScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -9,13 +10,23 @@ export const SwitchScreen = () => {
 
   return (
     <CustomView style={{marginTop: 100, paddingHorizontal: 10}}>
-      <Card>
-        <CustomSwitch
-          isOn={isEnabled}
-          onChange={() => toggleSwitch()}
-          text="On"
-        />
-      </Card>
+      <>
+        <Card>
+          <CustomSwitch
+            isOn={isEnabled}
+            onChange={() => toggleSwitch()}
+            text="On"
+          />
+        </Card>
+        <Separator />
+        <Card>
+          <CustomSwitch
+            isOn={isEnabled}
+            onChange={() => toggleSwitch()}
+            text="On"
+          />
+        </Card>
+      </>
     </CustomView>
   );
 };
