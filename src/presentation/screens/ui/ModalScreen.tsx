@@ -12,7 +12,7 @@ export const ModalScreen = () => {
       <Title text="Modal" safe />
       <Button text="Open modal" onPress={() => setIsVisible(true)} />
       <Modal visible={isVisible} animationType="slide">
-        <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.1)'}}>
+        <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.9)'}}>
           <View style={{paddingHorizontal: 10}}>
             <Title text="Modal content" safe />
           </View>
